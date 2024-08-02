@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "wapchita",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "Alejo Prieto Dávalos",
     author_email = "alejoprietodavalos@gmail.com",
     packages = find_packages(),
@@ -18,6 +18,7 @@ setup(
     install_requires = [
         "requests>=2.32",
         "pydantic>=2.8",
+        "tenacity>=tenacity==8.4.0"
     ],
     include_package_data = True
 )
