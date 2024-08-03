@@ -4,8 +4,6 @@ logger = logging.getLogger(__name__)
 
 from pydantic import BaseModel
 
-from wapchita.request import device_by_id
-
 __all__ = ["WapDevice"]
 
 T_WapDevice = TypeVar("T_WapDevice", bound="WapDevice")

@@ -7,7 +7,6 @@ from pydantic import BaseModel, Field
 from wapchita.models.device import WapDevice
 from wapchita.models.webhook import WapMeta, WapLinks
 from wapchita.models.user import WapUser
-from wapchita.models.types import MsgType
 
 
 class WebhookStatus(BaseModel):
