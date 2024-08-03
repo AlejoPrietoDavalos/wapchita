@@ -45,7 +45,7 @@ class Wapchita:
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_)
 
     def download_file(self, *, file_id: str) -> Response:
-        return self.request_wap.download_file(device_id=self.device.id, file_id=file_id)
+        return self.request_wap.download_file(file_id=file_id)
 
     def upload_file(self, *, path_file: Path) -> Response:
         return self.request_wap.upload_file(path_file=path_file)
