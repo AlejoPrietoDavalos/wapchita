@@ -1,4 +1,4 @@
-from typing import Type, TypeVar, Optional
+from typing import Optional
 import logging
 logger = logging.getLogger(__name__)
 
@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 __all__ = ["WapDevice"]
 
-T_WapDevice = TypeVar("T_WapDevice", bound="WapDevice")
 
 class WapDevice(BaseModel):
     id: str
@@ -15,9 +14,3 @@ class WapDevice(BaseModel):
     wid: Optional[str] = None
     version: Optional[int] = None
     plan: Optional[str] = None
-
-    @classmethod
-    def from_device_id(cls: Type[T_WapDevice], *, tkn: str, device_id: str) -> T_WapDevice:
-        response = device_by_id(tkn=tkn, device_id=device_id)
-        device = cls(**response.json())
-        return device
