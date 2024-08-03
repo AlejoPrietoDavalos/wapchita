@@ -6,15 +6,15 @@ V1 = "v1"
 def url_base() -> str:
     return os.getenv(WAP_URL_BASE)
 
+def url_contacts(*, device_id: str, user_wid: str) -> str:
+    return f"{url_base()}/{V1}/chat/{device_id}/contacts/{user_wid}"
+
 def url_device_by_id(*, device_id: str) -> str:
     return f"{url_base()}/{V1}/devices/{device_id}"
 
 def url_send_message() -> str:
     """ https://app.shock.uy/docs/#tag/Messages/operation/createMessage"""
     return f"{url_base()}/{V1}/messages"
-
-def url_contacts(*, device_id: str, user_wid: str) -> str:
-    return f"{url_base()}/{V1}/chat/{device_id}/contacts/{user_wid}"
 
 def url_edit_message(*, device_id: str, message_wid: str) -> str:
     return f"{url_base()}/{V1}/chat/{device_id}/messages/{message_wid}"

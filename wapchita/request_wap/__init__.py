@@ -7,6 +7,7 @@ from requests import Response
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
+from wapchita.request_wap._basics._contacts import contacts
 from wapchita.request_wap._basics._device_by_id import device_by_id
 from wapchita.request_wap._basics._download_file import download_file
 from wapchita.request_wap._basics._edit_message import edit_message
@@ -34,6 +35,10 @@ class RequestWap:
     @property
     def device_id(self) -> str:
         return self.device.id
+
+    def contacts(self, phone: str) -> Response:
+        """ TODO: Documentar: Funciona también con `user_wid`."""
+        return contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
 
     def device_by_id(self, *, device_id: str) -> Response:
         return device_by_id(tkn=self.tkn, device_id=device_id)

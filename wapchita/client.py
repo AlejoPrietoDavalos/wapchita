@@ -30,8 +30,10 @@ class Wapchita:
         return self.request_wap.device_id
     
     def user_from_phone(self, *, phone: str) -> WapUser:
-        """ ------------> FIXME: Hacer el from_phone."""
-        return WapUser.from_phone(tkn=self.tkn, phone=phone, device_id=self.device.id)
+        r = self.request_wap.contacts(phone=phone)
+        if r.status_code != 200:
+            raise Exception("Error al buscar usuario, documentar.")
+        return WapUser(**self.request_wap.contacts(phone=phone).json())
     
     def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
         return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)
