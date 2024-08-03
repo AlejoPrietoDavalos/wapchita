@@ -14,7 +14,7 @@ from wapchita.request_wap import RequestWap
 
 
 class Wapchita:
-    def __init__(self, *, tkn: str, device: WapDevice):
+    def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._request_wap = RequestWap(tkn=tkn, device=device)
     
     @property
