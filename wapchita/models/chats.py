@@ -5,7 +5,7 @@ import re
 from pydantic import BaseModel, Field
 
 from wapchita.models.device import WapDevice
-from wapchita.models.webhook import WapMeta, WapLinks
+from wapchita.models._extras._webhook import WapMeta, WapLinks, MsgType
 from wapchita.models.user import WapUser
 
 

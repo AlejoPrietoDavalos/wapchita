@@ -5,6 +5,7 @@ from pathlib import Path
 from requests import Response
 
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
+from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
 from wapchita.request_wap._basics._device_by_id import device_by_id
 from wapchita.request_wap._basics._download_file import download_file
@@ -18,9 +19,9 @@ from wapchita.request_wap._basics._upload_file import upload_file
 
 class RequestWap:
     """ TODO: Encapsular requests con tenacity, de forma que sea flexible."""
-    def __init__(self, *, tkn: str, device: WapDevice):
+    def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._tkn = tkn
-        self._device: WapDevice = device
+        self._device: WapDevice = instance_device(tkn=tkn, device=device)
     
     @property
     def tkn(self) -> str:
@@ -28,9 +29,6 @@ class RequestWap:
     
     @property
     def device(self) -> WapDevice:
-        if self._device is None:
-            # FIXME: Que lo levante de un .json.
-            self._device = WapDevice.from_device_id(tkn=self.tkn, device_id=self.device_id)
         return self._device
     
     @property
