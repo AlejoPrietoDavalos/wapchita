@@ -7,56 +7,50 @@ from pathlib import Path
 
 from requests import Response
 
+from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
-from wapchita.request import (
-    PRIORITY_DEFAULT, SORTCHATS_DEFAULT, Priority, SortChats,
-    send_message, edit_message, get_chats, download_file,
-    upload_file, update_chat_labels
-)
+from wapchita.request_wap import RequestWap
+
 
 class Wapchita:
-    def __init__(self, *, tkn: str, device_id: str):
-        self._tkn = tkn
-        self._device_id = device_id
-        self._device: WapDevice = None
+    def __init__(self, *, tkn: str, device: WapDevice):
+        self._request_wap = RequestWap(tkn=tkn, device=device)
     
     @property
-    def tkn(self) -> str:
-        return self._tkn
-    
-    @property
-    def device_id(self) -> str:
-        return self._device_id
-    
+    def request_wap(self) -> RequestWap:
+        return self._request_wap
+
     @property
     def device(self) -> WapDevice:
-        if self._device is None:
-            # FIXME: Que lo levante de un .json.
-            self._device = WapDevice.from_device_id(tkn=self.tkn, device_id=self.device_id)
-        return self._device
-        
+        return self.request_wap.device
+    
+    @property
+    def device_id(self) -> WapDevice:
+        return self.request_wap.device_id
+    
     def user_from_phone(self, *, phone: str) -> WapUser:
+        """ ------------> FIXME: Hacer el from_phone."""
         return WapUser.from_phone(tkn=self.tkn, phone=phone, device_id=self.device.id)
     
     def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
-        return send_message(tkn=self.tkn, phone=phone, message=message, file_id=file_id, priority=priority)
+        return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)
 
     def edit_message(self, *, message_wid: str, text: str) -> Response:
-        return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
+        return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT) -> Response:
-        return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_)
+        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_)
 
     def download_file(self, *, file_id: str) -> Response:
-        return download_file(tkn=self.tkn, device_id=self.device.id, file_id=file_id)
+        return self.request_wap.download_file(device_id=self.device.id, file_id=file_id)
 
     def upload_file(self, *, path_file: Path) -> Response:
-        return upload_file(tkn=self.tkn, path_file=path_file)
+        return self.request_wap.upload_file(path_file=path_file)
 
     def update_chat_labels(self, *, user_wid: str, labels: List[str] = None) -> Response:
-        return update_chat_labels(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, labels=labels)
-
+        return self.request_wap.update_chat_labels(user_wid=user_wid, labels=labels)
+    
     def upload_send_img(self, *, path_img: Path, phone: str) -> str:
         response_upload = self.upload_file(path_file=path_img)
         try:    # FIXME: Si el fichero existe tira un 400, por que te dice que uses el existente, y retorna el file_id.
