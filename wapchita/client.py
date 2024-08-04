@@ -2,7 +2,7 @@
 - FIXME: Realmente no necesito el device, solo su ID y el número, pero
 quizás otros datos como el nombre y demás puedan ayudarme en el futuro.
 """
-from typing import List
+from typing import List, Optional
 from pathlib import Path
 
 from requests import Response
@@ -29,12 +29,15 @@ class Wapchita:
     def device_id(self) -> WapDevice:
         return self.request_wap.device_id
     
-    def user_from_phone(self, *, phone: str) -> WapUser:
-        r = self.request_wap.contacts(phone=phone)
+    def user_from_phone(self, *, phone: str, create_if_404: bool = False) -> WapUser:
+        r = self.request_wap.contacts(phone=phone, create_if_404=create_if_404)
         if r.status_code != 200:
             raise Exception(f"Error al buscar usuario, documentar. {r.json()}")
         return WapUser(**self.request_wap.contacts(phone=phone).json())
     
+    def create_contact(self, *, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
+        return self.request_wap.create_contact(phone=phone, name=name, surname=surname)
+
     def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
         return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)
 

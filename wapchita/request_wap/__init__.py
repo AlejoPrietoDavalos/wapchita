@@ -1,6 +1,8 @@
 """ Requests básicas de Wapchita, actualizar al agregar."""
-from typing import List
+from typing import List, Optional
 from pathlib import Path
+import logging
+logger = logging.getLogger(__name__)
 
 from requests import Response
 
@@ -8,6 +10,7 @@ from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DE
 from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
 from wapchita.request_wap._basics._contacts import contacts
+from wapchita.request_wap._basics._create_contact import create_contact
 from wapchita.request_wap._basics._device_by_id import device_by_id
 from wapchita.request_wap._basics._download_file import download_file
 from wapchita.request_wap._basics._edit_message import edit_message
@@ -36,9 +39,18 @@ class RequestWap:
     def device_id(self) -> str:
         return self.device.id
 
-    def contacts(self, phone: str) -> Response:
+    def contacts(self, phone: str, create_if_404: bool = False) -> Response:
         """ TODO: Documentar: Funciona también con `user_wid`."""
-        return contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
+        r = contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
+        if r.status_code == 404 and create_if_404:
+            print(f"contacts_404 -> Create contact {phone}.")
+            logger.info(f"contacts_404 -> Create contact {phone}.")
+            r_create = self.create_contact(phone=phone)
+            r = contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
+        return r
+
+    def create_contact(self, *, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
+        return create_contact(tkn=self.tkn, device_id=self.device_id, phone=phone, name=name, surname=surname)
 
     def device_by_id(self, *, device_id: str) -> Response:
         return device_by_id(tkn=self.tkn, device_id=device_id)

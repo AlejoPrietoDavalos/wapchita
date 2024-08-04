@@ -9,6 +9,9 @@ def url_base() -> str:
 def url_contacts(*, device_id: str, user_wid: str) -> str:
     return f"{url_base()}/{V1}/chat/{device_id}/contacts/{user_wid}"
 
+def url_create_contact(*, device_id: str) -> str:
+    return f"{url_base()}/{V1}/chat/{device_id}/contacts"
+
 def url_device_by_id(*, device_id: str) -> str:
     return f"{url_base()}/{V1}/devices/{device_id}"
 
