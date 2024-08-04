@@ -32,7 +32,7 @@ class Wapchita:
     def user_from_phone(self, *, phone: str) -> WapUser:
         r = self.request_wap.contacts(phone=phone)
         if r.status_code != 200:
-            raise Exception("Error al buscar usuario, documentar.")
+            raise Exception(f"Error al buscar usuario, documentar. {r.json()}")
         return WapUser(**self.request_wap.contacts(phone=phone).json())
     
     def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
