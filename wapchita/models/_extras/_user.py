@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -28,7 +28,7 @@ class WapMetaUser(BaseModel):
         isContactBlocked: bool
         isDetachedContact: bool
         isEnterprise: bool
-        isGroupParticipant: bool
+        isGroupParticipant: Optional[bool] = None
         isPSA: bool
         isVerified: bool
         isWAContact: bool

@@ -14,7 +14,7 @@ class WapUser(BaseModel):
     wid: str                        # TODO: Revisar que phone2wid() == wid
     phone: str
     type: Literal["user"]
-    displayName: str
+    displayName: Optional[str] = None
     shortName: Optional[str] = None
     syncedAt: datetime
     createdBy: Optional[Any]        # TODO: Ver.
