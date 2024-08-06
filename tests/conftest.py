@@ -34,9 +34,9 @@ def text_test() -> str:
     return f"Simple text message {datetime.now(tz=UTC)}"
 
 @pytest.fixture
-def PATH_IMG_PNG_TEST(path_data: Path) -> Path:
+def path_img_png_test(path_data: Path) -> Path:
     return path_data / "michis.png"
 
 @pytest.fixture
-def PATH_IMG_JPEG_TEST(path_data: Path) -> Path:
+def path_img_jpeg_test(path_data: Path) -> Path:
     return path_data / "michis.jpeg"
