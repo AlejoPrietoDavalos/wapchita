@@ -1,4 +1,4 @@
-from typing import Type, TypeVar, Literal, Optional, Any
+from typing import TypeVar, Literal, Optional, Any
 from datetime import datetime
 
 from pydantic import BaseModel
@@ -23,15 +23,4 @@ class WapUser(BaseModel):
     meta: WapMetaUser
     metadata: list
     device: WapDevice
-    
-    @classmethod
-    def from_phone(cls: Type[T_WapUser], *, tkn: str, phone: str, device_id: str) -> Type[T_WapUser]:
-        pass
-        #response_search_chat = search_chat(tkn=tkn, phone=phone, device_id=device_id)
-        ##print(response_search_chat.json())     # TODO: Tira 500. y no tiene [0].
-        #try:
-        #    contact = response_search_chat.json()[0]["contact"]
-        #except:
-        #    print(response_search_chat.status_code)
-        #    return ""
-        #return cls(**contact)
+
