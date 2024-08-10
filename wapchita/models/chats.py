@@ -81,8 +81,9 @@ class WapChat(BaseModel):
 
 
 class WapChats(BaseModel):
+    """ TODO: Eliminar, complejiza"""
     chats: List[WapChat]
-    user: WapUser
+    user: WapUser               # FIXME: No debería estar acá.
 
     @property
     def date_last(self) -> datetime:
