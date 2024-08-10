@@ -39,7 +39,7 @@ MsgType = Literal[
 
 class BaseWapMsg(BaseModel):
     @property
-    def type(self) -> MsgType: ...
+    def type(self) -> MsgType: ...      # FIXME: Se está ocultando al usuario.
     @property
     def is_text(self) -> bool: return self.type == T_TEXT
     @property
