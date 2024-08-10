@@ -9,7 +9,7 @@ __all__ = ["WapDevice"]
 
 class WapDevice(BaseModel):
     id: str
-    phone: str
+    phone: Optional[str] = None     # FIXME: Creo que es un bug. debería poder ser None?
     alias: str
     wid: Optional[str] = None
     version: Optional[int] = None
