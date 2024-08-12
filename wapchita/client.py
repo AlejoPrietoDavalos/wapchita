@@ -10,7 +10,7 @@ from requests import Response
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
-from wapchita.request_wap import RequestWap
+from wapchita.request_wap.request_wap import RequestWap
 
 
 class Wapchita:
