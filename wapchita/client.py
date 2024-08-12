@@ -7,6 +7,7 @@ from pathlib import Path
 
 from requests import Response
 
+from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
@@ -16,7 +17,7 @@ from wapchita.request_wap.request_wap import RequestWap
 class Wapchita:
     def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._request_wap = RequestWap(tkn=tkn, device=device)
-    
+
     @property
     def request_wap(self) -> RequestWap:
         return self._request_wap
@@ -24,21 +25,22 @@ class Wapchita:
     @property
     def device(self) -> WapDevice:
         return self.request_wap.device
-    
+
     @property
     def device_id(self) -> WapDevice:
         return self.request_wap.device_id
-    
+
     def user_from_phone(self, *, phone: str, create_if_404: bool = False) -> WapUser:
         r = self.request_wap.contacts(phone=phone, create_if_404=create_if_404)
         if r.status_code != 200:
             raise Exception(f"Error al buscar usuario, documentar. {r.json()}")
         return WapUser(**self.request_wap.contacts(phone=phone).json())
-    
+
     def create_contact(self, *, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
         return self.request_wap.create_contact(phone=phone, name=name, surname=surname)
 
-    def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
+    def send_message(self, *, phone: str, message: str = "", file_id: str = None,
+                     priority: Priority = PRIORITY_DEFAULT) -> Response:
         return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)
 
     def edit_message(self, *, message_wid: str, text: str) -> Response:
@@ -55,12 +57,15 @@ class Wapchita:
 
     def update_chat_labels(self, *, user_wid: str, labels: List[str] = None) -> Response:
         return self.request_wap.update_chat_labels(user_wid=user_wid, labels=labels)
-    
+
     def upload_send_img(self, *, path_img: Path, phone: str) -> str:
         response_upload = self.upload_file(path_file=path_img)
-        try:    # FIXME: Si el fichero existe tira un 400, por que te dice que uses el existente, y retorna el file_id.
+        try:  # FIXME: Si el fichero existe tira un 400, por que te dice que uses el existente, y retorna el file_id.
             file_id = response_upload.json()[0]["id"]
         except Exception as e:
             file_id = response_upload.json()["meta"]["file"]
         self.send_message(phone=phone, file_id=file_id)
         return file_id
+
+    def mark_as_unread(self, *, user_wid: str, unread: bool = True) -> Response:
+        return self.request_wap.mark_as_unread(user_wid=user_wid, unread=unread)
