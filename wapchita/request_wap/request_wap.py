@@ -19,6 +19,7 @@ from wapchita.request_wap._basics._search_chat import search_chat
 from wapchita.request_wap._basics._send_message import send_message
 from wapchita.request_wap._basics._update_chat_labels import update_chat_labels
 from wapchita.request_wap._basics._upload_file import upload_file
+from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
 
 
 class RequestWap:
@@ -75,3 +76,6 @@ class RequestWap:
     
     def upload_file(self, *, path_file: Path) -> Response:
         return upload_file(tkn=self.tkn, path_file=path_file)
+
+    def mark_as_unread(self, *, user_wid: str, unread: bool = True) -> Response:
+        return mark_as_unread(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, unread=unread)
