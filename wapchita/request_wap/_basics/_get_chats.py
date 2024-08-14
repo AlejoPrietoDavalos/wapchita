@@ -20,16 +20,15 @@ def get_chats(
         user_wid: str,
         sort_: SortChats = SORTCHATS_DEFAULT,
         from_message_id: [str | None] = None,
-        number_of_message: [int | None] = None
 ) -> Response:
     url = url_get_chats(device_id=device_id)
     params = {"chat": user_wid, "sort": sort_}
     if from_message_id:
         params['end'] = from_message_id
 
-    r = requests.get(url=url, headers=get_headers(tkn=tkn), params=params)
-    if r.status_code >= 500:
+    response = requests.get(url=url, headers=get_headers(tkn=tkn), params=params)
+    if response.status_code >= 500:
         _msg = "Error inesperado de wapchita. Sin causa aparente, se reintenta."
         logger.warning(_msg)
         raise Exception(_msg)
-    return r
+    return response
