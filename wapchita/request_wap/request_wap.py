@@ -64,7 +64,7 @@ class RequestWap:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id=None) -> Response:
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id: Optional[str] = None) -> Response:
         return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
                          from_message_id=from_message_id)
 

@@ -45,7 +45,7 @@ class Wapchita:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id=None) -> Response:
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id: Optional[str] = None) -> Response:
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, from_message_id=from_message_id)
 
     def download_file(self, *, file_id: str) -> Response:
