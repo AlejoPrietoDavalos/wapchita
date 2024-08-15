@@ -1,7 +1,8 @@
 """ Requests básicas de Wapchita, actualizar al agregar."""
-from typing import List, Optional
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import List, Optional
+
 logger = logging.getLogger(__name__)
 
 from requests import Response
@@ -24,18 +25,19 @@ from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
 
 class RequestWap:
     """ TODO: Encapsular requests con tenacity, de forma que sea flexible."""
+
     def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._tkn = tkn
         self._device: WapDevice = instance_device(tkn=tkn, device=device)
-    
+
     @property
     def tkn(self) -> str:
         return self._tkn
-    
+
     @property
     def device(self) -> WapDevice:
         return self._device
-    
+
     @property
     def device_id(self) -> str:
         return self.device.id
@@ -58,22 +60,24 @@ class RequestWap:
 
     def download_file(self, *, file_id: str) -> Response:
         return download_file(tkn=self.tkn, device_id=self.device.id, file_id=file_id)
-    
+
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
-    
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT) -> Response:
-        return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_)
+
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id=None) -> Response:
+        return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
+                         from_message_id=from_message_id)
 
     def search_chat(self, *, phone: str, device_id: str) -> Response:
         return search_chat(tkn=self.tkn, phone=phone, device_id=device_id)
 
-    def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
+    def send_message(self, *, phone: str, message: str = "", file_id: str = None,
+                     priority: Priority = PRIORITY_DEFAULT) -> Response:
         return send_message(tkn=self.tkn, phone=phone, message=message, file_id=file_id, priority=priority)
 
     def update_chat_labels(self, *, user_wid: str, labels: List[str] = None) -> Response:
         return update_chat_labels(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, labels=labels)
-    
+
     def upload_file(self, *, path_file: Path) -> Response:
         return upload_file(tkn=self.tkn, path_file=path_file)
 

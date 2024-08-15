@@ -8,23 +8,28 @@ from wapchita.client import Wapchita
 
 
 @pytest.fixture
-def wap_url_base() -> str: return WAP_URL_BASE
+def wap_url_base() -> str:
+    return WAP_URL_BASE
 
 
 @pytest.fixture
-def wap_api_key() -> str: return WAP_API_KEY
+def wap_api_key() -> str:
+    return WAP_API_KEY
 
 
 @pytest.fixture
-def wap_device_id() -> str: return WAP_DEVICE_ID
+def wap_device_id() -> str:
+    return WAP_DEVICE_ID
 
 
 @pytest.fixture
-def wap_phone() -> str: return WAP_PHONE
+def wap_phone() -> str:
+    return WAP_PHONE
 
 
 @pytest.fixture
-def phone_tester() -> str: return PHONE_TESTER
+def phone_tester() -> str:
+    return PHONE_TESTER
 
 
 @pytest.fixture

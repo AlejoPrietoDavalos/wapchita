@@ -2,16 +2,15 @@
 - FIXME: Realmente no necesito el device, solo su ID y el número, pero
 quizás otros datos como el nombre y demás puedan ayudarme en el futuro.
 """
-from typing import List, Optional
 from pathlib import Path
+from typing import List, Optional
 
 from requests import Response
 
-from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
-from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita.request_wap.request_wap import RequestWap
+from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 
 
 class Wapchita:
@@ -28,7 +27,7 @@ class Wapchita:
 
     @property
     def device_id(self) -> WapDevice:
-        return self.request_wap.device_id
+        return self.request_wap.device.id
 
     def user_from_phone(self, *, phone: str, create_if_404: bool = False) -> WapUser:
         r = self.request_wap.contacts(phone=phone, create_if_404=create_if_404)
@@ -46,8 +45,8 @@ class Wapchita:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT) -> Response:
-        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_)
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id=None) -> Response:
+        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, from_message_id=from_message_id)
 
     def download_file(self, *, file_id: str) -> Response:
         return self.request_wap.download_file(file_id=file_id)
