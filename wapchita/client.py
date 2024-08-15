@@ -7,6 +7,8 @@ from typing import List, Optional
 
 from requests import Response
 
+from wapchita.async_tools import run_parallel
+from wapchita.models.chats import WapChat
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita.request_wap.request_wap import RequestWap
@@ -47,6 +49,22 @@ class Wapchita:
 
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id: Optional[str] = None) -> Response:
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, from_message_id=from_message_id)
+
+    async def async_get_chats(self) -> Response:
+        # TODO: Programar.
+        ...
+    
+    async def async_get_chat_details(self) -> Response:
+        # TODO: Programar.
+        ...
+
+    async def async_get_chats_history(self) -> List[WapChat]:
+        chats_before, chat_current = run_parallel(*[
+            self.async_get_chats(),         # TODO: Programar.
+            self.async_get_chat_details()   # TODO: Programar.
+        ])
+        # Procesar y concatenar los chats.
+        # Retornar List[WapChat]
 
     def download_file(self, *, file_id: str) -> Response:
         return self.request_wap.download_file(file_id=file_id)
