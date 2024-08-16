@@ -3,7 +3,7 @@
 quizás otros datos como el nombre y demás puedan ayudarme en el futuro.
 """
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, TypeVar
 
 from requests import Response
 
@@ -13,11 +13,15 @@ from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita.request_wap.request_wap import RequestWap
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
+#from wapchita.answering import Answering
 
+
+T_Wapchita = TypeVar("T_Wapchita", bound="Wapchita")
 
 class Wapchita:
     def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._request_wap = RequestWap(tkn=tkn, device=device)
+        #self._answering = Answering()
 
     @property
     def request_wap(self) -> RequestWap:

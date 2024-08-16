@@ -1,4 +1,4 @@
-from wapchita.client import Wapchita
+from wapchita.client import Wapchita, T_Wapchita
 from wapchita.request_wap.request_wap import RequestWap
 
 from wapchita.models.user import WapUser
