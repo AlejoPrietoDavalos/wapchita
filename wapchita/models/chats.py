@@ -26,7 +26,7 @@ class WapChat(BaseModel):
     date: datetime
     timestamp: int
     body: Optional[str] = None
-    chat: str
+    chat: str | dict
     device: WapDevice
     media: Optional[WapchitaMedia] = None
     events: dict

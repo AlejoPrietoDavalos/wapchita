@@ -93,7 +93,7 @@ class WapMeta(BaseModel):
     notifyName: str
     source: str
     via: Optional[str] = None
-    isFirstMessage: bool
+    isFirstMessage: Optional[bool] = None
 
 class WapStats(BaseModel):
     notes: int

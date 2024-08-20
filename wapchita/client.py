@@ -3,19 +3,25 @@
 quizás otros datos como el nombre y demás puedan ayudarme en el futuro.
 """
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, TypeVar
 
 from requests import Response
 
+from wapchita.async_tools import run_parallel
+from wapchita.models.chats import WapChat
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita.request_wap.request_wap import RequestWap
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
+#from wapchita.answering import Answering
 
+
+T_Wapchita = TypeVar("T_Wapchita", bound="Wapchita")
 
 class Wapchita:
     def __init__(self, *, tkn: str, device: WapDevice | str | Path):
         self._request_wap = RequestWap(tkn=tkn, device=device)
+        #self._answering = Answering()
 
     @property
     def request_wap(self) -> RequestWap:
@@ -45,8 +51,24 @@ class Wapchita:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id=None) -> Response:
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id: Optional[str] = None) -> Response:
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, from_message_id=from_message_id)
+
+    async def async_get_chats(self) -> Response:
+        # TODO: Programar.
+        ...
+    
+    async def async_get_chat_details(self) -> Response:
+        # TODO: Programar.
+        ...
+
+    async def async_get_chats_history(self) -> List[WapChat]:
+        chats_before, chat_current = run_parallel(*[
+            self.async_get_chats(),         # TODO: Programar.
+            self.async_get_chat_details()   # TODO: Programar.
+        ])
+        # Procesar y concatenar los chats.
+        # Retornar List[WapChat]
 
     def download_file(self, *, file_id: str) -> Response:
         return self.request_wap.download_file(file_id=file_id)
