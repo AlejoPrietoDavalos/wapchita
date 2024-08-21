@@ -3,6 +3,8 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 
+from wapchita.request_wap._basics._delete_message import delete_message
+
 logger = logging.getLogger(__name__)
 
 from requests import Response
@@ -65,7 +67,8 @@ class RequestWap:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, message_id: Optional[str] = None) -> Response:
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
+                  message_id: Optional[str] = None) -> Response:
         return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
                          message_id=message_id)
 
@@ -87,3 +90,6 @@ class RequestWap:
 
     def mark_as_unread(self, *, user_wid: str, unread: bool = True) -> Response:
         return mark_as_unread(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, unread=unread)
+
+    def delete_message(self, *, message_wid: str) -> Response:
+        return delete_message(tkn=self.tkn, message_wid=message_wid)

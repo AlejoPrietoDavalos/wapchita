@@ -97,3 +97,7 @@ class Wapchita:
 
     def mark_as_unread(self, *, user_wid: str, unread: bool = True) -> Response:
         return self.request_wap.mark_as_unread(user_wid=user_wid, unread=unread)
+
+
+    def delete_message(self, *, message_wid:str) -> Response:
+        return self.request_wap.delete_message(message_wid=message_wid)
