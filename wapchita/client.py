@@ -5,6 +5,7 @@ quizás otros datos como el nombre y demás puedan ayudarme en el futuro.
 from pathlib import Path
 from typing import List, Optional, TypeVar
 
+import httpx
 from requests import Response
 
 from wapchita.async_tools import run_parallel
@@ -12,6 +13,7 @@ from wapchita.models.chats import WapChat
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita.request_wap.request_wap import RequestWap
+from wapchita.request_wap.utils import wait_msg_sent, async_wait_msg_sent
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 
 # from wapchita.answering import Answering
@@ -98,6 +100,11 @@ class Wapchita:
     def mark_as_unread(self, *, user_wid: str, unread: bool = True) -> Response:
         return self.request_wap.mark_as_unread(user_wid=user_wid, unread=unread)
 
-
-    def delete_message(self, *, message_wid:str) -> Response:
+    def delete_message(self, *, message_wid: str) -> Response:
         return self.request_wap.delete_message(message_wid=message_wid)
+
+    def wait_msg_sent(self, *, message_wid: str) -> Response:
+        return wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid)
+
+    async def async_wait_msg_sent(self, *, message_wid: str) -> httpx.Response:
+        return await async_wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid)
