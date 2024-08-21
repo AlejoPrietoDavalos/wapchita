@@ -1,3 +1,4 @@
+from typing import Optional
 import logging
 
 import requests
@@ -19,12 +20,12 @@ def get_chats(
         device_id: str,
         user_wid: str,
         sort_: SortChats = SORTCHATS_DEFAULT,
-        from_message_id: [str | None] = None,
+        message_id: Optional[str] = None,
 ) -> Response:
     url = url_get_chats(device_id=device_id)
     params = {"chat": user_wid, "sort": sort_}
-    if from_message_id:
-        params['end'] = from_message_id
+    if message_id:
+        params['end'] = message_id
 
     response = requests.get(url=url, headers=get_headers(tkn=tkn), params=params)
     if response.status_code >= 500:
