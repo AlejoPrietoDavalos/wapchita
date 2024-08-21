@@ -6,9 +6,9 @@ from constants import WAP_API_KEY, WAP_DEVICE_ID, PHONE_TESTER
 from wapchita import Wapchita
 
 
-@pytest.mark.skip(reason="Solo pueden eliminarse mensajes en "
-                         "estado queued, por lo que a veces falla")
-def test_send_message_text():
+#@pytest.mark.skip(reason="Solo pueden eliminarse mensajes en "
+#                        "estado queued, por lo que a veces falla")
+def test_delete_message():
     wapchita = Wapchita(
         tkn=WAP_API_KEY,
         device=WAP_DEVICE_ID
