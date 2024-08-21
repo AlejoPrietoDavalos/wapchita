@@ -51,3 +51,7 @@ def url_update_chat_labels(*, device_id: str, user_wid: str) -> str:
 
 def url_mark_as_unread(*, device_id: str, user_wid: str) -> str:
     return f"{url_base()}/{V1}/chat/{device_id}/chats/{user_wid}/unread"
+
+
+def url_get_chat_details(*, device_id: str, message_wid: str):
+    return f"{url_base()}/{V1}/chat/{device_id}/messages/{message_wid}"

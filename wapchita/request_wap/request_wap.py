@@ -21,6 +21,7 @@ from wapchita.request_wap._basics._send_message import send_message
 from wapchita.request_wap._basics._update_chat_labels import update_chat_labels
 from wapchita.request_wap._basics._upload_file import upload_file
 from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
+from wapchita.request_wap._basics._get_chat_details import get_chat_details
 
 
 class RequestWap:
@@ -67,6 +68,9 @@ class RequestWap:
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, from_message_id: Optional[str] = None) -> Response:
         return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
                          from_message_id=from_message_id)
+
+    def get_chat_details(self, *, message_wid:str) -> Response:
+        return get_chat_details(tkn=self.tkn, device_id=self.device.id,message_wid=message_wid)
 
     def search_chat(self, *, phone: str, device_id: str) -> Response:
         return search_chat(tkn=self.tkn, phone=phone, device_id=device_id)
