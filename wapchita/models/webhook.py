@@ -19,7 +19,7 @@ class WapWebhookBody(BaseWapMsg):
         return self.data.type
 
     @property
-    def message_id(self) -> str:
+    def message_id(self) -> str:    # TODO: Habría que renombrarlo a message_wid, pero cambiar también en shock_api.
         return self.id
 
     @property

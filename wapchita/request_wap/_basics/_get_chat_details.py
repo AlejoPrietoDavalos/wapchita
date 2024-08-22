@@ -16,9 +16,9 @@ def get_chat_details(
         *,
         tkn: str,
         device_id: str,
-        message_id: str,
+        message_wid: str,
 ) -> Response:
-    url = url_get_chat_details(device_id=device_id, message_wid=message_id)
+    url = url_get_chat_details(device_id=device_id, message_wid=message_wid)
 
     response = requests.get(url=url, headers=get_headers(tkn=tkn))
     if response.status_code >= 500:

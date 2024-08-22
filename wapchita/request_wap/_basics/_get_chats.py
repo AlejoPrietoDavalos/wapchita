@@ -20,12 +20,12 @@ def get_chats(
         device_id: str,
         user_wid: str,
         sort_: SortChats = SORTCHATS_DEFAULT,
-        message_id: Optional[str] = None,
+        message_wid: Optional[str] = None,
 ) -> Response:
     url = url_get_chats(device_id=device_id)
     params = {"chat": user_wid, "sort": sort_}
-    if message_id:
-        params['end'] = message_id
+    if message_wid:
+        params['end'] = message_wid
 
     response = requests.get(url=url, headers=get_headers(tkn=tkn), params=params)
     if response.status_code >= 500:
