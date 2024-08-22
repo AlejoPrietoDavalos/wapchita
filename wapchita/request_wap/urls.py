@@ -55,3 +55,11 @@ def url_mark_as_unread(*, device_id: str, user_wid: str) -> str:
 
 def url_get_chat_details(*, device_id: str, message_wid: str):
     return f"{url_base()}/{V1}/chat/{device_id}/messages/{message_wid}"
+
+
+def url_get_message(*, message_wid: str):
+    return f"{url_base()}/{V1}/messages/{message_wid}"
+
+
+def get_url_delete_message(*, message_wid):
+    return f"{url_base()}/{V1}/messages/{message_wid}"

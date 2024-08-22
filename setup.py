@@ -19,7 +19,8 @@ setup(
     install_requires=[
         "requests>=2.32",
         "pydantic>=2.8",
-        "tenacity>=8.4.0"
+        "tenacity>=8.4.0",
+        "httpx>=0.27.0"
     ],
     include_package_data=True
 )
