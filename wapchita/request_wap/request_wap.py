@@ -68,12 +68,12 @@ class RequestWap:
         return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
 
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                  message_id: Optional[str] = None) -> Response:
+                  message_wid: Optional[str] = None) -> Response:
         return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
-                         message_id=message_id)
+                         message_wid=message_wid)
 
-    def get_chat_details(self, *, message_id: str) -> Response:
-        return get_chat_details(tkn=self.tkn, device_id=self.device.id, message_id=message_id)
+    def get_chat_details(self, *, message_wid: str) -> Response:
+        return get_chat_details(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid)
 
     def search_chat(self, *, phone: str, device_id: str) -> Response:
         return search_chat(tkn=self.tkn, phone=phone, device_id=device_id)

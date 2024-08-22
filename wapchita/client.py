@@ -56,22 +56,22 @@ class Wapchita:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                  message_id: Optional[str] = None) -> Response:
-        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_id=message_id)
+                  message_wid: Optional[str] = None) -> Response:
+        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
     async def async_get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                              message_id: Optional[str] = None) -> Response:
-        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_id=message_id)
+                              message_wid: Optional[str] = None) -> Response:
+        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
     async def async_get_chat_details(self, *, message_wid: str) -> Response:
-        return self.request_wap.get_chat_details(message_id=message_wid)
+        return self.request_wap.get_chat_details(message_wid=message_wid)
 
-    async def async_get_chats_history(self, *, user_wid: str, message_id: str) -> List[WapChat]:
+    async def async_get_chats_history(self, *, user_wid: str, message_wid: str) -> List[WapChat]:
         chats_before, chat_current = await run_parallel(*[
-            self.async_get_chats(user_wid=user_wid, message_id=message_id),
+            self.async_get_chats(user_wid=user_wid, message_wid=message_wid),
             # TODO fijarme como estarn ordenados los mensajes en ambas funciones
             # TODO los primeros tienen que ser los mas viejos
-            self.async_get_chat_details(message_wid=message_id)
+            self.async_get_chat_details(message_wid=message_wid)
         ])
         # TODO control de status 200
         history = chats_before.json()

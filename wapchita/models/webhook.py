@@ -19,7 +19,7 @@ class WapWebhookBody(BaseWapMsg):
         return self.data.type
 
     @property
-    def message_id(self) -> str:
+    def message_wid(self) -> str:
         return self.id
 
     @property
