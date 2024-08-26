@@ -69,8 +69,6 @@ class Wapchita:
     async def async_get_chats_history(self, *, user_wid: str, message_wid: str) -> List[WapChat]:
         chats_before, chat_current = await run_parallel(*[
             self.async_get_chats(user_wid=user_wid, message_wid=message_wid),
-            # TODO fijarme como estarn ordenados los mensajes en ambas funciones
-            # TODO los primeros tienen que ser los mas viejos
             self.async_get_chat_details(message_wid=message_wid)
         ])
         # TODO control de status 200
