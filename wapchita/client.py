@@ -19,8 +19,16 @@ from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DE
 # from wapchita.answering import Answering
 
 
-T_Wapchita = TypeVar("T_Wapchita", bound="Wapchita")
+def chats_history_from_responses(chats_before: Response, chat_current: Response) -> List[WapChat]:
+    """ Dados los chats anteriores y el actual formatea toda la lista de chats."""
+    # TODO control de status 200
+    chats_history = chats_before.json()
+    chats_history.reverse()
+    chats_history.append(chat_current.json())
+    return [WapChat(**chat) for chat in chats_history]
 
+
+T_Wapchita = TypeVar("T_Wapchita", bound="Wapchita")
 
 class Wapchita:
     def __init__(self, *, tkn: str, device: WapDevice | str | Path):
@@ -48,34 +56,37 @@ class Wapchita:
     def create_contact(self, *, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
         return self.request_wap.create_contact(phone=phone, name=name, surname=surname)
 
-    def send_message(self, *, phone: str, message: str = "", file_id: str = None,
-                     priority: Priority = PRIORITY_DEFAULT) -> Response:
+    def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
         return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)
 
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                  message_wid: Optional[str] = None) -> Response:
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, message_wid: Optional[str] = None) -> Response:
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
-    async def async_get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                              message_wid: Optional[str] = None) -> Response:
-        return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
+    def get_chat_details(self, *, message_wid: str) -> Response:
+        return self.request_wap.get_chat_details(message_wid=message_wid)
+
+    def get_chats_history(self, *, user_wid: str, message_wid: str) -> List[WapChat]:
+        chats_before = self.get_chats(user_wid=user_wid, message_wid=message_wid)
+        chat_current = self.get_chat_details(message_wid=message_wid)
+        chats_history = chats_history_from_responses(chats_before=chats_before, chat_current=chat_current)
+        return chats_history
+
+    async def async_get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, message_wid: Optional[str] = None) -> Response:
+        return self.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
     async def async_get_chat_details(self, *, message_wid: str) -> Response:
-        return self.request_wap.get_chat_details(message_wid=message_wid)
+        return self.get_chat_details(message_wid=message_wid)
 
     async def async_get_chats_history(self, *, user_wid: str, message_wid: str) -> List[WapChat]:
         chats_before, chat_current = await run_parallel(*[
             self.async_get_chats(user_wid=user_wid, message_wid=message_wid),
             self.async_get_chat_details(message_wid=message_wid)
         ])
-        # TODO control de status 200
-        history = chats_before.json()
-        history.reverse()
-        history.append(chat_current.json())
-        return [WapChat(**chat) for chat in history]
+        chats_history = chats_history_from_responses(chats_before=chats_before, chat_current=chat_current)
+        return chats_history
 
     def download_file(self, *, file_id: str) -> Response:
         return self.request_wap.download_file(file_id=file_id)
