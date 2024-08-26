@@ -52,3 +52,11 @@ class WapWebhookBody(BaseWapMsg):
     def is_bot_request(self) -> bool:
         """ Retorna True la solicitud viene del propio bot."""
         return self.device_phone == self.from_phone
+
+    @property
+    def is_chat(self) -> bool:
+        return self.data.chat.is_chat
+
+    @property
+    def is_group(self) -> bool:
+        return self.data.chat.is_group

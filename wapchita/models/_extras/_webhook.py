@@ -110,7 +110,7 @@ class WapChat(BaseModel):
     id: str
     name: Optional[str] = None
     date: Optional[str] = None
-    type: str
+    type: Literal["chat", "group"]
     status: str
     waStatus: str
     statusUpdatedAt: Optional[str] = None
@@ -125,6 +125,15 @@ class WapChat(BaseModel):
     owner: WapOwner
     contact: dict                       # ---> TODO
     links: dict                         # ---> TODO
+
+    @property
+    def is_chat(self) -> bool:
+        return self.type == "chat"
+    
+    @property
+    def is_group(self) -> bool:
+        return self.type == "group"
+
 
 class WapData(BaseWapMsg):
     id: str
