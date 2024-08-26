@@ -5,9 +5,22 @@ import re
 from pydantic import BaseModel, Field
 
 from wapchita.models.device import WapDevice
-from wapchita.models._extras._webhook import WapMeta, WapLinks, MsgType
 from wapchita.models.user import WapUser
 from wapchita.models._extras._chats import WapchitaMedia, WebhookStatus
+from wapchita.models._extras._webhook import (
+    WapMeta,
+    WapLinks,
+    MsgType,
+    T_TEXT,
+    T_IMAGE,
+    T_STICKER,
+    T_VIDEO,
+    T_LOCATION,
+    T_AUDIO,
+    T_DOCUMENT,
+    T_CONTACTS,
+    T_GROUP_EVENT,
+)
 
 __all__ = ["WapChat", "WapChats"]
 
@@ -40,35 +53,39 @@ class WapChat(BaseModel):
 
     @property
     def is_text(self) -> bool:
-        return self.type == "text"
+        return self.type == T_TEXT
     
     @property
     def is_image(self) -> bool:
-        return self.type == "image"
+        return self.type == T_IMAGE
     
     @property
     def is_sticker(self) -> bool:
-        return self.type == "sticker"
+        return self.type == T_STICKER
     
     @property
     def is_video(self) -> bool:
-        return self.type == "video"
+        return self.type == T_VIDEO
     
     @property
     def is_location(self) -> bool:
-        return self.type == "location"
+        return self.type == T_LOCATION
     
     @property
     def is_audio(self) -> bool:
-        return self.type == "audio"
+        return self.type == T_AUDIO
     
     @property
     def is_document(self) -> bool:
-        return self.type == "document"
+        return self.type == T_DOCUMENT
     
     @property
     def is_contacts(self) -> bool:
-        return self.type == "contacts"
+        return self.type == T_CONTACTS
+
+    @property
+    def is_group_event(self) -> bool:
+        return self.type == T_GROUP_EVENT
 
     @property
     def file_id(self) -> str:

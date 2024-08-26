@@ -15,6 +15,7 @@ __all__ = [
     "T_AUDIO",
     "T_DOCUMENT",
     "T_CONTACTS",
+    "T_GROUP_EVENT",
 ]
 
 T_TEXT = "text"
@@ -25,6 +26,7 @@ T_LOCATION = "location"
 T_AUDIO = "audio"
 T_DOCUMENT = "document"
 T_CONTACTS = "contacts"
+T_GROUP_EVENT = "group:event"
 
 MsgType = Literal[
     "text",
@@ -34,7 +36,8 @@ MsgType = Literal[
     "location",
     "audio",
     "document",
-    "contacts"
+    "contacts",
+    "group:event"
 ]
 
 class BaseWapMsg(BaseModel):
@@ -56,7 +59,8 @@ class BaseWapMsg(BaseModel):
     def is_document(self) -> bool: return self.type == T_DOCUMENT
     @property
     def is_contacts(self) -> bool: return self.type == T_CONTACTS
-
+    @property
+    def is_group_event(self) -> bool: return self.type == T_GROUP_EVENT
 
 
 
