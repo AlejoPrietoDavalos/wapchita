@@ -63,6 +63,7 @@ class Wapchita:
         return self.request_wap.edit_message(message_wid=message_wid, text=text)
 
     def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, message_wid: Optional[str] = None) -> Response:
+        """ TODO: Poner que retorna un List[WapChat], y arreglar en la API principal."""
         return self.request_wap.get_chats(user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
     def get_chat_details(self, *, message_wid: str) -> Response:

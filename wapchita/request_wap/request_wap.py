@@ -49,7 +49,6 @@ class RequestWap:
         """ TODO: Documentar: Funciona también con `user_wid`."""
         r = contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
         if r.status_code == 404 and create_if_404:
-            print(f"contacts_404 -> Create contact {phone}.")
             logger.info(f"contacts_404 -> Create contact {phone}.")
             r_create = self.create_contact(phone=phone)
             r = contacts(tkn=self.tkn, device_id=self.device_id, phone=phone)
@@ -67,10 +66,8 @@ class RequestWap:
     def edit_message(self, *, message_wid: str, text: str) -> Response:
         return edit_message(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid, text=text)
 
-    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT,
-                  message_wid: Optional[str] = None) -> Response:
-        return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_,
-                         message_wid=message_wid)
+    def get_chats(self, *, user_wid: str, sort_: SortChats = SORTCHATS_DEFAULT, message_wid: Optional[str] = None) -> Response:
+        return get_chats(tkn=self.tkn, device_id=self.device.id, user_wid=user_wid, sort_=sort_, message_wid=message_wid)
 
     def get_chat_details(self, *, message_wid: str) -> Response:
         return get_chat_details(tkn=self.tkn, device_id=self.device.id, message_wid=message_wid)
@@ -78,8 +75,7 @@ class RequestWap:
     def search_chat(self, *, phone: str, device_id: str) -> Response:
         return search_chat(tkn=self.tkn, phone=phone, device_id=device_id)
 
-    def send_message(self, *, phone: str, message: str = "", file_id: str = None,
-                     priority: Priority = PRIORITY_DEFAULT) -> Response:
+    def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
         return send_message(tkn=self.tkn, phone=phone, message=message, file_id=file_id, priority=priority)
 
     def update_chat_labels(self, *, user_wid: str, labels: List[str] = None) -> Response:
