@@ -14,7 +14,7 @@ from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
 from wapchita._api.request_wap import RequestWap
 from wapchita._api.utils import wait_msg_sent, async_wait_msg_sent
-from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
+from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT, T_KindGroupChats
 
 # from wapchita.answering import Answering
 
@@ -55,6 +55,9 @@ class Wapchita:
 
     def create_contact(self, *, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
         return self.request_wap.create_contact(phone=phone, name=name, surname=surname)
+
+    def group_chats(self, *, kind: T_KindGroupChats = "any", page: int = 0, size: int = 100) -> Response:
+        return self.request_wap.group_chats(kind=kind, page=page, size=size)
 
     def send_message(self, *, phone: str, message: str = "", file_id: str = None, priority: Priority = PRIORITY_DEFAULT) -> Response:
         return self.request_wap.send_message(phone=phone, message=message, file_id=file_id, priority=priority)

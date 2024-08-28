@@ -37,6 +37,9 @@ def url_get_chats(*, device_id: str) -> str:
     return f"{url_base()}/{V1}/chat/{device_id}/messages"
 
 
+def url_group_chats(*, device_id: str) -> str:
+    return f"{url_base()}/{V1}/devices/{device_id}/groups"
+
 def url_download_file(*, device_id: str, file_id: str) -> str:
     return f"{url_base()}/{V1}/chat/{device_id}/files/{file_id}/download"
 
