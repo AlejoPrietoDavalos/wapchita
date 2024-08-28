@@ -27,7 +27,7 @@ __all__ = ["WapChat", "WapChats"]
 
 class WapChat(BaseModel):
     id: str
-    scope: str
+    scope: Optional[str] = None
     type: MsgType
     flow: str
     status: str
@@ -40,10 +40,10 @@ class WapChat(BaseModel):
     timestamp: int
     body: Optional[str] = None
     chat: str | dict
-    device: WapDevice
+    device: Optional[WapDevice] = None
     media: Optional[WapchitaMedia] = None
     events: dict
-    webhook: WebhookStatus
+    webhook: Optional[WebhookStatus] = None
     meta: WapMeta
     links: WapLinks
 
