@@ -1,5 +1,4 @@
-from wapchita.client import Wapchita
-from wapchita.models.user import WapUser
+from wapchita import Wapchita, WapUser
 
 
 def test_get_user(wapchita: Wapchita, phone_tester: str) -> None:

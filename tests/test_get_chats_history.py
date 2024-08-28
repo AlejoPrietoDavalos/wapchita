@@ -1,17 +1,11 @@
 import os
 import asyncio
 
-from constants import WAP_API_KEY, WAP_DEVICE_ID, PHONE_TESTER
-from wapchita import Wapchita
-from wapchita.models.chats import WapChat
-from wapchita.utils import phone2wid
+from constants import PHONE_TESTER
+from wapchita import Wapchita, WapChat, phone2wid
 
 
-def test_get_chats_history():
-    wapchita = Wapchita(
-        tkn=WAP_API_KEY,
-        device=WAP_DEVICE_ID
-    )
+def test_get_chats_history(wapchita: Wapchita):
     chats_response = asyncio.run(wapchita.async_get_chats_history(
         user_wid=phone2wid(phone=PHONE_TESTER),
         message_wid=os.getenv("EXAMPLE_MESSAGE_WID"))
@@ -21,11 +15,7 @@ def test_get_chats_history():
     assert isinstance(chats_response[0], WapChat)
 
 
-def test_get_chats_history_olders_first():
-    wapchita = Wapchita(
-        tkn=WAP_API_KEY,
-        device=WAP_DEVICE_ID
-    )
+def test_get_chats_history_olders_first(wapchita: Wapchita):
     chats_response = asyncio.run(wapchita.async_get_chats_history(
         user_wid=phone2wid(phone=PHONE_TESTER),
         message_wid=os.getenv("EXAMPLE_MESSAGE_WID"))

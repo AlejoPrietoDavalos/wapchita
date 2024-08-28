@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 
 from constants import WAP_URL_BASE, WAP_API_KEY, WAP_PHONE, WAP_DEVICE_ID, PHONE_TESTER
-from wapchita.client import Wapchita
+from wapchita import Wapchita
 
 
 @pytest.fixture
