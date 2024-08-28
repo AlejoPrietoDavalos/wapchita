@@ -3,8 +3,8 @@ from typing import List, Optional
 import requests
 from requests import Response
 
-from wapchita.request_wap.urls import url_update_chat_labels
-from wapchita.request_wap.headers import get_headers_app_json
+from wapchita.api.urls import url_update_chat_labels
+from wapchita.api.headers import get_headers_app_json
 
 
 def update_chat_labels(

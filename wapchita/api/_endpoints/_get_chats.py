@@ -6,8 +6,8 @@ import tenacity
 from requests import Response
 from tenacity import stop_after_attempt, wait_exponential
 
-from wapchita.request_wap.headers import get_headers
-from wapchita.request_wap.urls import url_get_chats
+from wapchita.api.headers import get_headers
+from wapchita.api.urls import url_get_chats
 from wapchita.typings import SortChats, SORTCHATS_DEFAULT
 
 logger = logging.getLogger(__name__)

@@ -3,8 +3,8 @@ from pathlib import Path
 import requests
 from requests import Response
 
-from wapchita.request_wap.urls import url_upload_file
-from wapchita.request_wap.headers import get_headers
+from wapchita.api.urls import url_upload_file
+from wapchita.api.headers import get_headers
 
 
 def upload_file(*, tkn: str, path_file: Path) -> Response:

@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.request_wap.urls import url_edit_message
-from wapchita.request_wap.headers import get_headers_app_json
+from wapchita.api.urls import url_edit_message
+from wapchita.api.headers import get_headers_app_json
 
 
 def edit_message(*, tkn: str, device_id: str, message_wid: str, text: str) -> Response:

@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.request_wap.headers import get_headers
-from wapchita.request_wap.urls import url_device_by_id
+from wapchita.api.headers import get_headers
+from wapchita.api.urls import url_device_by_id
 
 
 def device_by_id(*, tkn: str, device_id: str) -> Response:

@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 
-from wapchita.request_wap._basics._delete_message import delete_message
+from wapchita.api._endpoints._delete_message import delete_message
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +12,18 @@ from requests import Response
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
-from wapchita.request_wap._basics._contacts import contacts
-from wapchita.request_wap._basics._create_contact import create_contact
-from wapchita.request_wap._basics._device_by_id import device_by_id
-from wapchita.request_wap._basics._download_file import download_file
-from wapchita.request_wap._basics._edit_message import edit_message
-from wapchita.request_wap._basics._get_chats import get_chats
-from wapchita.request_wap._basics._search_chat import search_chat
-from wapchita.request_wap._basics._send_message import send_message
-from wapchita.request_wap._basics._update_chat_labels import update_chat_labels
-from wapchita.request_wap._basics._upload_file import upload_file
-from wapchita.request_wap._basics._mark_as_unread import mark_as_unread
-from wapchita.request_wap._basics._get_chat_details import get_chat_details
+from wapchita.api._endpoints._contacts import contacts
+from wapchita.api._endpoints._create_contact import create_contact
+from wapchita.api._endpoints._device_by_id import device_by_id
+from wapchita.api._endpoints._download_file import download_file
+from wapchita.api._endpoints._edit_message import edit_message
+from wapchita.api._endpoints._get_chats import get_chats
+from wapchita.api._endpoints._search_chat import search_chat
+from wapchita.api._endpoints._send_message import send_message
+from wapchita.api._endpoints._update_chat_labels import update_chat_labels
+from wapchita.api._endpoints._upload_file import upload_file
+from wapchita.api._endpoints._mark_as_unread import mark_as_unread
+from wapchita.api._endpoints._get_chat_details import get_chat_details
 
 
 class RequestWap:

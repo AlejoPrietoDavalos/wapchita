@@ -5,8 +5,8 @@ import tenacity
 from requests import Response
 from tenacity import stop_after_attempt, wait_exponential
 
-from wapchita.request_wap.headers import get_headers
-from wapchita.request_wap.urls import url_get_chat_details
+from wapchita.api.headers import get_headers
+from wapchita.api.urls import url_get_chat_details
 
 logger = logging.getLogger(__name__)
 

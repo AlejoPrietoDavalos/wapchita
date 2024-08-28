@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.request_wap.urls import url_search_chats
-from wapchita.request_wap.headers import get_headers
+from wapchita.api.urls import url_search_chats
+from wapchita.api.headers import get_headers
 
 
 def search_chat(*, tkn: str, phone: str, device_id: str) -> Response:

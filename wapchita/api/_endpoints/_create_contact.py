@@ -3,8 +3,8 @@ from typing import Optional
 import requests
 from requests import Response
 
-from wapchita.request_wap.headers import get_headers_app_json
-from wapchita.request_wap.urls import url_create_contact
+from wapchita.api.headers import get_headers_app_json
+from wapchita.api.urls import url_create_contact
 
 def create_contact(*, tkn: str, device_id: str, phone: str, name: Optional[str] = None, surname: Optional[str] = None) -> Response:
     """ TODO: Mejorar input con payload o algo asi con pydantic.
