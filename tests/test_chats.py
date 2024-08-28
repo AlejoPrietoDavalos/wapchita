@@ -14,10 +14,9 @@ def test_get_chats_with_messages(wapchita: Wapchita):
 
 
 def test_get_chats_with_wrong_number(wapchita: Wapchita):
-    chats_response = wapchita.get_chats(user_wid=phone2wid(phone='asdasdasd'))
+    chats_response = wapchita.get_chats(user_wid='asdasdasd')
     assert chats_response.status_code == 200
-    chats = chats_response.json()
-    assert chats == []
+    assert len(chats_response.json()) == 0
 
 
 def test_get_chats_with_real_message_wid(wapchita: Wapchita):

@@ -28,11 +28,6 @@ def wap_phone() -> str:
 
 
 @pytest.fixture
-def phone_tester() -> str:
-    return PHONE_TESTER
-
-
-@pytest.fixture
 def wapchita(wap_api_key: str, wap_device_id: str) -> Wapchita:
     return Wapchita(tkn=wap_api_key, device=wap_device_id)
 
