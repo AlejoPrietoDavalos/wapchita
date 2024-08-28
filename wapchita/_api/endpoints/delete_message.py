@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.api.headers import get_headers
-from wapchita.api.urls import get_url_delete_message
+from wapchita._api.headers import get_headers
+from wapchita._api.urls import get_url_delete_message
 
 
 def delete_message(*, tkn: str, message_wid: str = "") -> Response:

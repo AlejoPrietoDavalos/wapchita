@@ -1,3 +1,4 @@
+from typing import Optional
 import logging
 
 import requests
@@ -5,22 +6,28 @@ import tenacity
 from requests import Response
 from tenacity import stop_after_attempt, wait_exponential
 
-from wapchita.api.headers import get_headers
-from wapchita.api.urls import url_get_chat_details
+from wapchita._api.headers import get_headers
+from wapchita._api.urls import url_get_chats
+from wapchita.typings import SortChats, SORTCHATS_DEFAULT
 
 logger = logging.getLogger(__name__)
 
 
 @tenacity.retry(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=1, max=60))
-def get_chat_details(
+def get_chats(
         *,
         tkn: str,
         device_id: str,
-        message_wid: str,
+        user_wid: str,
+        sort_: SortChats = SORTCHATS_DEFAULT,
+        message_wid: Optional[str] = None,
 ) -> Response:
-    url = url_get_chat_details(device_id=device_id, message_wid=message_wid)
+    url = url_get_chats(device_id=device_id)
+    params = {"chat": user_wid, "sort": sort_}
+    if message_wid:
+        params['end'] = message_wid
 
-    response = requests.get(url=url, headers=get_headers(tkn=tkn))
+    response = requests.get(url=url, headers=get_headers(tkn=tkn), params=params)
     if response.status_code >= 500:
         _msg = "Error inesperado de wapchita. Sin causa aparente, se reintenta."
         logger.warning(_msg)

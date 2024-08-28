@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 
-from wapchita.api._endpoints._delete_message import delete_message
+from wapchita._api.endpoints.delete_message import delete_message
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +12,18 @@ from requests import Response
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
-from wapchita.api._endpoints._contacts import contacts
-from wapchita.api._endpoints._create_contact import create_contact
-from wapchita.api._endpoints._device_by_id import device_by_id
-from wapchita.api._endpoints._download_file import download_file
-from wapchita.api._endpoints._edit_message import edit_message
-from wapchita.api._endpoints._get_chats import get_chats
-from wapchita.api._endpoints._search_chat import search_chat
-from wapchita.api._endpoints._send_message import send_message
-from wapchita.api._endpoints._update_chat_labels import update_chat_labels
-from wapchita.api._endpoints._upload_file import upload_file
-from wapchita.api._endpoints._mark_as_unread import mark_as_unread
-from wapchita.api._endpoints._get_chat_details import get_chat_details
+from wapchita._api.endpoints.contacts import contacts
+from wapchita._api.endpoints.create_contact import create_contact
+from wapchita._api.endpoints.device_by_id import device_by_id
+from wapchita._api.endpoints.download_file import download_file
+from wapchita._api.endpoints.edit_message import edit_message
+from wapchita._api.endpoints.get_chats import get_chats
+from wapchita._api.endpoints.search_chat import search_chat
+from wapchita._api.endpoints.send_message import send_message
+from wapchita._api.endpoints.update_chat_labels import update_chat_labels
+from wapchita._api.endpoints.upload_file import upload_file
+from wapchita._api.endpoints.mark_as_unread import mark_as_unread
+from wapchita._api.endpoints.get_chat_details import get_chat_details
 
 
 class RequestWap:

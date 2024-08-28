@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.api.headers import get_headers_app_json
-from wapchita.api.urls import url_mark_as_unread
+from wapchita._api.headers import get_headers_app_json
+from wapchita._api.urls import url_mark_as_unread
 
 
 def mark_as_unread(

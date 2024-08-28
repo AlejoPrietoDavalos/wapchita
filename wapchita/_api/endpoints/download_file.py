@@ -1,8 +1,8 @@
 import requests
 from requests import Response
 
-from wapchita.api.headers import get_headers
-from wapchita.api.urls import url_download_file
+from wapchita._api.headers import get_headers
+from wapchita._api.urls import url_download_file
 
 
 def download_file(*, tkn: str, device_id: str, file_id: str) -> Response:

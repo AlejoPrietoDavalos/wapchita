@@ -2,8 +2,8 @@ import requests
 from requests import Response
 
 from wapchita.typings import Priority, PRIORITY_DEFAULT
-from wapchita.api.urls import url_send_message
-from wapchita.api.headers import get_headers_app_json
+from wapchita._api.urls import url_send_message
+from wapchita._api.headers import get_headers_app_json
 
 
 def send_message(

@@ -12,8 +12,8 @@ from wapchita.async_tools import run_parallel
 from wapchita.models.chats import WapChat
 from wapchita.models.device import WapDevice
 from wapchita.models.user import WapUser
-from wapchita.api.request_wap import RequestWap
-from wapchita.api.utils import wait_msg_sent, async_wait_msg_sent
+from wapchita._api.request_wap import RequestWap
+from wapchita._api.utils import wait_msg_sent, async_wait_msg_sent
 from wapchita.typings import Priority, PRIORITY_DEFAULT, SortChats, SORTCHATS_DEFAULT
 
 # from wapchita.answering import Answering
