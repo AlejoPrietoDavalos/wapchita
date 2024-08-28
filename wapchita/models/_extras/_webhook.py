@@ -4,7 +4,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 __all__ = [
-    "WapData",
+    "WapDataWebhook",
     "MsgType",
     "BaseWapMsg",
     "T_TEXT",
@@ -64,7 +64,7 @@ class BaseWapMsg(BaseModel):
 
 
 
-class WapEvents(BaseModel):
+class WapEventsWebhook(BaseModel):
     sent: Optional[dict] = None
 
 class WapLinks(BaseModel):
@@ -99,18 +99,18 @@ class WapMeta(BaseModel):
     via: Optional[str] = None
     isFirstMessage: Optional[bool] = None
 
-class WapStats(BaseModel):
+class WapStatsWebhook(BaseModel):
     notes: int
     localMessages: int
     inboundMessages: int
     outboundMessages: int
 
-class WapOwner(BaseModel):
+class WapOwnerWebhook(BaseModel):
     agent: Optional[str]
     assigner: Optional[str] = None
     assignedAt: Optional[str] = None
 
-class WapChat(BaseModel):
+class WapChatWebhook(BaseModel):
     id: str
     name: Optional[str] = None
     date: Optional[str] = None
@@ -124,9 +124,9 @@ class WapChat(BaseModel):
     lastInboundMessageAt: Optional[str] = None
     lastAutoReply: None                 # ---> TODO
     lastAutoReplyAt: None               # ---> TODO
-    stats: WapStats
+    stats: WapStatsWebhook
     labels: List[str]
-    owner: WapOwner
+    owner: WapOwnerWebhook
     contact: dict                       # ---> TODO
     links: dict                         # ---> TODO
 
@@ -139,7 +139,7 @@ class WapChat(BaseModel):
         return self.type == "group"
 
 
-class WapData(BaseWapMsg):
+class WapDataWebhook(BaseWapMsg):
     id: str
     type: MsgType
     flow: str
@@ -153,7 +153,7 @@ class WapData(BaseWapMsg):
     date: datetime
     timestamp: int
     body: Optional[str] = None
-    chat: WapChat
-    events: WapEvents
+    chat: WapChatWebhook
+    events: WapEventsWebhook
     meta: WapMeta
     links: WapLinks

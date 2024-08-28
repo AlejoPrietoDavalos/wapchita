@@ -1,9 +1,9 @@
 from typing import List
 
 from wapchita.models.device import WapDevice
-from wapchita.models._extras._webhook import WapData, BaseWapMsg, MsgType
+from wapchita.models._extras._webhook import WapDataWebhook, BaseWapMsg, MsgType
 
-__all__ = ["WapWebhookBody", "WapData", "BaseWapMsg", "MsgType"]
+__all__ = ["WapWebhookBody", "WapDataWebhook", "BaseWapMsg", "MsgType"]
 
 
 class WapWebhookBody(BaseWapMsg):
@@ -12,7 +12,7 @@ class WapWebhookBody(BaseWapMsg):
     event: str
     created: int
     device: WapDevice
-    data: WapData
+    data: WapDataWebhook
 
     @property
     def type(self) -> MsgType:
