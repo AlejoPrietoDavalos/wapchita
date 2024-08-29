@@ -12,20 +12,20 @@ from wapchita.typings import (
 )
 from wapchita.utils import instance_device
 from wapchita.models.device import WapDevice
-from wapchita._api.endpoints.contacts import contacts
-from wapchita._api.endpoints.create_contact import create_contact
-from wapchita._api.endpoints.group_chats import group_chats, ResponseGroups
-from wapchita._api.endpoints.delete_message import delete_message
-from wapchita._api.endpoints.device_by_id import device_by_id
-from wapchita._api.endpoints.download_file import download_file
-from wapchita._api.endpoints.edit_message import edit_message
-from wapchita._api.endpoints.get_chats import get_chats
-from wapchita._api.endpoints.search_chat import search_chat
-from wapchita._api.endpoints.send_message import send_message
-from wapchita._api.endpoints.update_chat_labels import update_chat_labels
-from wapchita._api.endpoints.upload_file import upload_file
-from wapchita._api.endpoints.mark_as_unread import mark_as_unread
-from wapchita._api.endpoints.get_chat_details import get_chat_details
+from wapchita.api.endpoints.contacts import contacts
+from wapchita.api.endpoints.create_contact import create_contact
+from wapchita.api.endpoints.group_chats import group_chats, ResponseGroups
+from wapchita.api.endpoints.delete_message import delete_message
+from wapchita.api.endpoints.device_by_id import device_by_id
+from wapchita.api.endpoints.download_file import download_file
+from wapchita.api.endpoints.edit_message import edit_message
+from wapchita.api.endpoints.get_chats import get_chats
+from wapchita.api.endpoints.search_chat import search_chat
+from wapchita.api.endpoints.send_message import send_message
+from wapchita.api.endpoints.update_chat_labels import update_chat_labels
+from wapchita.api.endpoints.upload_file import upload_file
+from wapchita.api.endpoints.mark_as_unread import mark_as_unread
+from wapchita.api.endpoints.get_chat_details import get_chat_details
 
 logger = logging.getLogger(__name__)
 

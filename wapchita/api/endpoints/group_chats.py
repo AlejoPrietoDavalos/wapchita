@@ -6,8 +6,8 @@ from requests import Response
 from requestsdantic import BaseResponse, BaseJSON
 from pydantic import HttpUrl
 
-from wapchita._api.headers import get_headers
-from wapchita._api.urls import url_group_chats
+from wapchita.api.headers import get_headers
+from wapchita.api.urls import url_group_chats
 from wapchita.typings import T_KindGroupChats
 
 class LinksDetails(BaseJSON):

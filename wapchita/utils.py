@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from wapchita.models.device import WapDevice
-from wapchita._api.endpoints.device_by_id import device_by_id
+from wapchita.api.endpoints.device_by_id import device_by_id
 
 
 def phone2wid(*, phone: str) -> str:
