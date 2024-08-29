@@ -116,8 +116,8 @@ class Wapchita:
     def delete_message(self, *, message_wid: str) -> Response:
         return self.request_wap.delete_message(message_wid=message_wid)
 
-    def wait_msg_sent(self, *, message_wid: str) -> Response:
-        return wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid)
+    def wait_msg_sent(self, *, message_wid: str, max_tries: int = 120) -> Response:
+        return wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid, max_tries=max_tries)
 
-    async def async_wait_msg_sent(self, *, message_wid: str) -> httpx.Response:
-        return await async_wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid)
+    async def async_wait_msg_sent(self, *, message_wid: str, max_tries: int = 120) -> httpx.Response:
+        return await async_wait_msg_sent(tkn=self._request_wap.tkn, message_wid=message_wid, max_tries=max_tries)
